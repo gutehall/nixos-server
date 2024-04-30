@@ -10,7 +10,6 @@ DISABLE_UPDATE_PROMPT="true"
 
 plugins=(
   git
-  #exa-zsh
   aws
   minikube
   colored-man-pages
