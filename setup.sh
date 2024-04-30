@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# Clone the repository
-git clone https://github.com/gutehall/nixos-server
-cd nixos-server
-
 # Replace the configuration files with those from the repository
 sudo cp -r configuration/* /etc/nixos/
 
