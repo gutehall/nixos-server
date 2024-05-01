@@ -2,7 +2,7 @@
 
 {
   imports = [
-      #./zsh.nix 
+      ./zsh.nix 
       ./config.nix
       ./vim.nix
       ./dconf.nix
@@ -19,6 +19,7 @@
     vagrant
     packer
     ansible
+    terraform
     git
     gh
     zsh

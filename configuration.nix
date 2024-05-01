@@ -38,7 +38,7 @@
    users.users.mathias = {
      isNormalUser = true;
      description = "mathias";
-     extraGroups = [ "wheel" ];
+     extraGroups = [ "networkmanager" "wheel" ];
      packages = with pkgs; [
      ];
    };
@@ -53,6 +53,8 @@
   ];
 
   system.stateVersion = "23.11";
+
+  services.openssh.enable = true;
 
   nix.gc.automatic = true;
 }
