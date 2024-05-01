@@ -1,10 +1,29 @@
 { config, lib, pkgs, ... }:
 
-  # programs.zsh.ohMyZsh = {
-  #   enable = true;
-  #   plugins = [ "git" "python" "man" ];
-  #   theme = "agnoster";
-  # };
+  #  programs.zsh.ohMyZsh = {
+  #    enable = true;
+  #     enableCompletion = true;
+  #     autosuggestions.enable = true;
+  #     syntaxHighlighting.enable = true;
+  #     plugins = [ 
+  #         "git" 
+  #         "aws" 
+  #         "minikube" 
+  #         "colored-man-pages" 
+  #         "colorize" 
+  #       ];
+  #     theme = "bullet-train";
+  #     customPkgs = with pkgs; [
+  #        pkgs.zsh-git-prompt
+  #        pkgs.zsh-nix-shell
+  #        pkgs.zsh-vi-mode
+  #        pkgs.zsh-completions
+  #        pkgs.zsh-command-time
+  #        pkgs.zsh-powerlevel10k
+  #        pkgs.zsh-fast-syntax-highlighting
+  #        pkgs.nix-zsh-completions
+  #      ];
+  #   };
 
 {
     programs.zsh = { 
