@@ -45,6 +45,7 @@
     awscli2
     eza
     tmux
+    vscode
   ];
 
   home.file = {
