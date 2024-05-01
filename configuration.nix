@@ -52,12 +52,6 @@
     (nerdfonts.override { fonts = [ "Hack" ]; })
   ];
 
-  imports = [
-    (fetchTarball "https://github.com/msteen/nixos-vscode-server/tarball/master")
-  ];
-
-  services.vscode-server.enable = true;
-
   services.openssh.enable = true;
 
   system.stateVersion = "23.11";

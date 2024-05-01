@@ -5,7 +5,6 @@
       ./zsh.nix 
       ./config.nix
       ./vim.nix
-      ./dconf.nix
   ];
 
   home.username = "mathias";
@@ -23,7 +22,7 @@
     git
     gh
     zsh
-    #oh-my-zsh
+    oh-my-zsh
     #zsh-history-substring-search
     #zsh-fzf-tab
     #zsh-syntax-highlighting
@@ -45,7 +44,6 @@
     awscli2
     eza
     tmux
-    vscode
   ];
 
   home.file = {
