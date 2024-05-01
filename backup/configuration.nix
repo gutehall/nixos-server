@@ -66,10 +66,10 @@
     gh
     zsh
     oh-my-zsh
-    #zsh-history-substring-search
-    #zsh-fzf-tab
-    #zsh-syntax-highlighting
-    #zsh-autosuggestions
+    zsh-history-substring-search
+    zsh-fzf-tab
+    zsh-syntax-highlighting
+    zsh-autosuggestions
     tilix
     unrar
     unzip
@@ -95,6 +95,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
