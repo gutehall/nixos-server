@@ -1,3 +1,7 @@
+# Edit this configuration file to define what should be installed on
+# your system.  Help is available in the configuration.nix(5) man page
+# and in the NixOS manual (accessible by running ‘nixos-help’).
+
 { config, pkgs, ... }:
 
 {
@@ -52,7 +56,38 @@
     isNormalUser = true;
     description = "mathias";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [git];
+    packages = with pkgs; [
+    vim
+    vagrant
+    packer
+    ansible
+    terraform
+    git
+    gh
+    zsh
+    oh-my-zsh
+    #zsh-history-substring-search
+    #zsh-fzf-tab
+    #zsh-syntax-highlighting
+    #zsh-autosuggestions
+    tilix
+    unrar
+    unzip
+    curl
+    wget
+    gnupg
+    htop
+    btop
+    docker
+    kubectl
+    minikube
+    lazygit
+    lsd
+    bat
+    awscli2
+    eza
+    tmux
+    ];
   };
 
   # Allow unfree packages
