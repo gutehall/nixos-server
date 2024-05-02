@@ -4,7 +4,7 @@
   imports =
     [ 
       ./hardware-configuration.nix
-      ./git.nix
+      # ./git.nix
       ./vim.nix
       ./zsh.nix
     ];
@@ -50,14 +50,7 @@
     description = "mathias";
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.zsh;
-    packages = with pkgs; [
-      zsh
-      oh-my-zsh
-      zsh-history-substring-search
-      zsh-fzf-tab
-      zsh-syntax-highlighting
-      zsh-autosuggestions
-    ];
+    packages = with pkgs; [ zsh ];
   };
 
   # Allow unfree packages
@@ -92,6 +85,7 @@
   ];
 
   programs.zsh.enable = true;
+  programs.git.enable = true;
 
   fonts.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "Hack" ]; })
