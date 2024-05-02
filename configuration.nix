@@ -1,24 +1,31 @@
+# Edit this configuration file to define what should be installed on
+# your system.  Help is available in the configuration.nix(5) man page
+# and in the NixOS manual (accessible by running ‘nixos-help’).
+
 { config, pkgs, ... }:
 
 {
   imports =
-    [ 
+    [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      <home-manager/nixos>
+      ./git.nix
+      ./vim.nix
+      ./zsh.nix
     ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];   
-
-  home-manager.users.mathias.imports = [ ./home.nix ]; 
-
+  # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos";
-  # networking.networkmanager.enable = true;
 
+  # Enable networking
+  networking.networkmanager.enable = true;
+
+  # Set your time zone.
   time.timeZone = "Europe/Stockholm";
 
+  # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
   i18n.extraLocaleSettings = {
@@ -33,28 +40,82 @@
     LC_TIME = "sv_SE.UTF-8";
   };
 
+  # Configure keymap in X11
+  services.xserver = {
+    layout = "se";
+    xkbVariant = "";
+  };
+
+  # Configure console keymap
   console.keyMap = "sv-latin1";
 
-   users.users.mathias = {
-     isNormalUser = true;
-     description = "mathias";
-     extraGroups = [ "networkmanager" "wheel" ];
-     packages = with pkgs; [
-     ];
-   };
+  users.users.mathias = {
+    isNormalUser = true;
+    description = "mathias";
+    extraGroups = [ "networkmanager" "wheel" ];
+    shell = pkgs.zsh;
+    packages = with pkgs; [
+      zsh
+      oh-my-zsh
+      zsh-history-substring-search
+      zsh-fzf-tab
+      zsh-syntax-highlighting
+      zsh-autosuggestions
+    ];
+  };
+
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  environment.systemPackages = with pkgs; [
+    vim
+    vagrant
+    packer
+    ansible
+    terraform
+    git
+    gh
+    tilix
+    unrar
+    unzip
+    wget
+    gnupg
+    htop
+    btop
+    docker
+    kubectl
+    minikube
+    lazygit
+    lsd
+    bat
+    awscli2
+    eza
+    tmux
+  ];
 
   programs.zsh.enable = true;
-  users.users.mathias.shell = pkgs.zsh;
-
-  nixpkgs.config.allowUnfree = true;
 
   fonts.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "Hack" ]; })
   ];
 
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 1w";
+  };
+
+  nix.settings.auto-optimise-store = true;
+
   services.openssh.enable = true;
 
-  system.stateVersion = "23.11";
+  # Open ports in the firewall.
+  # networking.firewall.allowedTCPPorts = [ ... ];
+  # networking.firewall.allowedUDPPorts = [ ... ];
+  # Or disable the firewall altogether.
+  # networking.firewall.enable = false;
 
-  nix.gc.automatic = true;
+  system.stateVersion = "23.11";
 }
