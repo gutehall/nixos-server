@@ -3,7 +3,7 @@
 # Paths
 VIMRC_PATH=~/.vim_runtime
 ZSH_CUSTOM_PLUGINS=~/.oh-my-zsh/custom/plugins
-SOURCES_PATH=/sources
+SOURCES_PATH=./sources
 NIXOS_CONFIG_PATH=~/nixos
 BACKUP_PATH=/etc/nixos.bak
 
@@ -15,23 +15,25 @@ BACKUP_PATH=/etc/nixos.bak
 #     nix-shell '<home-manager>' -A install
 # fi
 
+# Remove .oh-my-zsh if it exists
+if [ -d "$HOME/.oh-my-zsh" ]; then
+    rm -rf "$HOME/.oh-my-zsh"
+fi
+
 # Clone repositories
 clone_repositories() {
-    local repositories=(
-        "https://github.com/amix/vimrc.git:$VIMRC_PATH"
-        "https://github.com/zsh-users/zsh-autosuggestions:$ZSH_CUSTOM_PLUGINS/zsh-autosuggestions"
-        "https://github.com/zsh-users/zsh-syntax-highlighting.git:$ZSH_CUSTOM_PLUGINS/zsh-syntax-highlighting"
-        "https://github.com/MohamedElashri/exa-zsh:$ZSH_CUSTOM_PLUGINS/exa-zsh"
+    declare -A repositories=(
+        ["https://github.com/amix/vimrc.git"]=$VIMRC_PATH
+        ["https://github.com/zsh-users/zsh-autosuggestions"]=$ZSH_CUSTOM_PLUGINS/zsh-autosuggestions
+        ["https://github.com/zsh-users/zsh-syntax-highlighting.git"]=$ZSH_CUSTOM_PLUGINS/zsh-syntax-highlighting
+        ["https://github.com/MohamedElashri/exa-zsh"]=$ZSH_CUSTOM_PLUGINS/exa-zsh
     )
 
-    for repo_path in "${repositories[@]}"; do
-        IFS=':' read -r repo url <<< "$repo_path"
-        git clone --depth=1 "$url" "$repo"
+    for repo_url in "${!repositories[@]}"; do
+        destination="${repositories[$repo_url]}"
+        git clone --depth=1 "$repo_url" "$destination"
     done
 }
-
-# Create directories if not exist
-mkdir -p "$ZSH_CUSTOM/themes"
 
 # Clone repositories in parallel
 clone_repositories &

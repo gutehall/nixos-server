@@ -1,3 +1,5 @@
+{ pkgs, ... }:
+
 {
   programs.git = {
     enable = true;
@@ -8,5 +10,5 @@
       co = "checkout";
       gs = "status";
       gpl = "pull";
-    };
   };
+}
